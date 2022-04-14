@@ -3,7 +3,6 @@ class Node {
     int data;
     Node left;
     Node right;
-    Node parent;
     
     public Node(String namaFolder, int data) {
         this.namaFolder = namaFolder;
@@ -12,7 +11,7 @@ class Node {
 }
 
 class BST {
-    private Node root;
+    Node root;
     
     public boolean isempty() {
         return root == null;
@@ -25,7 +24,6 @@ class BST {
         
         if (isempty()) {
             root = newNode;
-            System.out.println("Folder " + root.namaFolder + " sebagai root");
 
         } else {
             while (state != null) {
@@ -48,16 +46,16 @@ class BST {
 
             if (newNode.namaFolder.equals(temp.namaFolder)) {
                 temp.left = newNode;
-                System.out.println("folder " + newNode.namaFolder + " masuk sebelah kiri "+ temp.namaFolder);    
+                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ temp.namaFolder);    
 
             }
             else if (newNode.namaFolder.substring(0,x).equals(temp.namaFolder)) {
                 temp.left = newNode;
-                System.out.println("folder " + newNode.namaFolder + " masuk sebelah kiri "+ temp.namaFolder);
+                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ temp.namaFolder);
             }
             else {
                 temp.right = newNode;
-                System.out.println("folder " + newNode.namaFolder + " masuk sebelah kanan "+ temp.namaFolder);
+                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ temp.namaFolder);
             }
         }
     }
@@ -84,12 +82,21 @@ class BST {
             System.out.println("folder tidak ditemukan");
         }
     }
+
+    public void display(Node root) {
+        if (root != null) {
+            System.out.println(root.namaFolder + " (" + root.data + ") ");
+            display(root.left);
+            display(root.right);
+        }
+    }
 }
 
 public class RemedUTS {
     public static void main(String[] args) {
         BST a = new BST();
-        a.insert("data", 1321);
+        a.insert("data", 0);
+
         a.insert("a", 23);       
         a.insert("b", 3587);
         a.insert("aa", 456);
@@ -98,5 +105,6 @@ public class RemedUTS {
         a.insert("ab", 3245);
         a.insert("ca", 2354);
         a.searching("ab");
+        a.display(a.root);
     }
 }
