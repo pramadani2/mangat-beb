@@ -30,16 +30,20 @@ class BST {
         } else {
             while (state != null) {
                 temp = state;
-                int x = newNode.namaFolder.length()-2;
+                int x = newNode.namaFolder.length()-1;
 
                 if (newNode.namaFolder.equals(state.namaFolder)) {
                     state = state.left;
 
                 }
+                else if (newNode.namaFolder.substring(0, x).equals(state.namaFolder)) {
+                    state = state.left;
+                }
                 else {
                     state = state.right;
                 }
             }
+
             int x = newNode.namaFolder.length()-1;
 
             if (newNode.namaFolder.equals(temp.namaFolder)) {
@@ -48,7 +52,7 @@ class BST {
 
             }
             else if (newNode.namaFolder.substring(0,x).equals(temp.namaFolder)) {
-                temp = temp.left;
+                temp.left = newNode;
                 System.out.println("folder " + newNode.namaFolder + " masuk sebelah kiri "+ temp.namaFolder);
             }
             else {
@@ -85,18 +89,14 @@ class BST {
 public class RemedUTS {
     public static void main(String[] args) {
         BST a = new BST();
-        a.insert("/data", 1321);
-        a.insert("/a", 23);
-        a.insert("/a", 34);
-        a.insert("/a", 546);
-        a.insert("/ab", 456);
-        a.insert("/b", 3587);
-        a.insert("/b", 3576);
-        a.insert("/b", 5698);
-        a.insert("/b", 695);
-        a.insert("/c", 235);
-        a.insert("/d", 435);
-        a.insert("/d", 3452);
-        a.searching("/ab");
+        a.insert("data", 1321);
+        a.insert("a", 23);       
+        a.insert("b", 3587);
+        a.insert("aa", 456);
+        a.insert("c", 235);
+        a.insert("d", 435);
+        a.insert("ab", 3245);
+        a.insert("ca", 2354);
+        a.searching("ab");
     }
 }
