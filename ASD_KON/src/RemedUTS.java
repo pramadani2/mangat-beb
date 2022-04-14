@@ -19,43 +19,42 @@ class BST {
     
     public void insert(String namaFolder, int data) {
         Node newNode = new Node(namaFolder, data);
-        Node temp = null;
-        Node state = root;
+        Node prev = null;
+        Node temp = root;
         
         if (isempty()) {
             root = newNode;
 
         } else {
-            while (state != null) {
-                temp = state;
+            while (temp != null) {
+                prev = temp;
                 int x = newNode.namaFolder.length()-1;
 
-                if (newNode.namaFolder.equals(state.namaFolder)) {
-                    state = state.left;
-
+                if (newNode.namaFolder.equals(temp.namaFolder)) {
+                    temp = temp.left;
                 }
-                else if (newNode.namaFolder.substring(0, x).equals(state.namaFolder)) {
-                    state = state.left;
+                else if (newNode.namaFolder.substring(0, x).equals(temp.namaFolder)) {
+                    temp = temp.left;
                 }
                 else {
-                    state = state.right;
+                    temp = temp.right;
                 }
             }
 
             int x = newNode.namaFolder.length()-1;
 
-            if (newNode.namaFolder.equals(temp.namaFolder)) {
-                temp.left = newNode;
-                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ temp.namaFolder);    
+            if (newNode.namaFolder.equals(prev.namaFolder)) {
+                prev.left = newNode;
+                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ prev.namaFolder);    
 
             }
-            else if (newNode.namaFolder.substring(0,x).equals(temp.namaFolder)) {
-                temp.left = newNode;
-                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ temp.namaFolder);
+            else if (newNode.namaFolder.substring(0, x).equals(prev.namaFolder)) {
+                prev.left = newNode;
+                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ prev.namaFolder);
             }
             else {
-                temp.right = newNode;
-                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ temp.namaFolder);
+                prev.right = newNode;
+                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ prev.namaFolder);
             }
         }
     }
@@ -85,9 +84,14 @@ class BST {
 
     public void display(Node root) {
         if (root != null) {
-            System.out.println(root.namaFolder + " (" + root.data + ") ");
+            if (this.root.namaFolder.equals(root.namaFolder)) {
+                System.out.println(this.root.namaFolder);
+            }
+            else {
+                System.out.println(root.namaFolder + " (" + root.data + ") ");
+            }
             display(root.left);
-            display(root.right);
+            display(root.right); 
         }
     }
 }
