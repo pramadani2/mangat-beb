@@ -1,3 +1,4 @@
+package Tree1;
 class Node {
     String namaFolder;
     int data;
@@ -45,16 +46,16 @@ class BST {
 
             if (newNode.namaFolder.equals(prev.namaFolder)) {
                 prev.left = newNode;
-                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ prev.namaFolder);    
+                System.out.println("TAMBAH " + newNode.namaFolder + " PADA kiri /"+ prev.namaFolder);    
 
             }
             else if (newNode.namaFolder.substring(0, x).equals(prev.namaFolder)) {
                 prev.left = newNode;
-                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ prev.namaFolder);
+                System.out.println("TAMBAH " + newNode.namaFolder + " PADA kiri /"+ prev.namaFolder);
             }
             else {
                 prev.right = newNode;
-                System.out.println("TAMBAH " + newNode.namaFolder + " PADA /"+ prev.namaFolder);
+                System.out.println("TAMBAH " + newNode.namaFolder + " PADA kanan /"+ prev.namaFolder);
             }
         }
     }
