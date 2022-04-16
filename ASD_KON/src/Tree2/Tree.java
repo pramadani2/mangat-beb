@@ -201,25 +201,32 @@ class CobaPohon{
         Node temp;
         T.makeTree("data", 0);
 
-        T.addChild("a", 1, T.getRoot());
-        T.addChild("b", 2, T.getRoot());
-        T.addChild("c", 3, T.getRoot());
+        T.addChild("a", 1024, T.getRoot());
+        T.addChild("b", 256, T.getRoot());
+        T.addChild("c", 35, T.getRoot());
 
-        temp = T.findNode("a", T.getRoot());
-        T.addChild("aa", 4, temp);
-        T.addChild("ab", 5, temp);
+        temp = T.findNode("b", T.getRoot());
+        T.addChild("ba", 100, temp);
+        T.addChild("bc", 150, temp);
+        T.addChild("bd", 125, temp);
+        T.addChild("be", 75, temp);
 
         temp = T.findNode("c", T.getRoot());
-        T.addChild("ca", 6, temp);
+        T.addChild("cb", 30, temp);
+        T.addChild("ce", 50, temp);
 
-        temp = T.findNode("a", T.getRoot());
+        temp = T.findNode("ba", T.findNode("b", T.getRoot()));
+        T.addChild("baa", 500, temp);
+        T.addChild("bac", 25, temp);
+
+        temp = T.findNode("c", T.getRoot());
         T.printSum(temp);
 
         System.out.println();
         T.printTree(T.getRoot());
 
         System.out.println();
-        temp = T.findNode("a", T.getRoot());
+        temp = T.findNode("c", T.getRoot());
         T.printTree(temp);
     }
 }
