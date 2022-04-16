@@ -18,7 +18,7 @@ class Node{
         return namaFolder;
     }
 
-    int getNilaiFolder(){
+    int getNilai(){
         return nilai;
     }
 
@@ -154,7 +154,6 @@ public class Tree{
                 else{
                     while(bantu.getSibling() != root.getChild()){
                         printTree(bantu);
-                        
                         bantu = bantu.getSibling();
                     }
 
@@ -162,6 +161,37 @@ public class Tree{
                 }
             }
         }
+    }
+
+    int findSum(Node root){
+        int jumlah = 0;
+        if(root != null){
+            jumlah = root.getNilai();
+
+            Node bantu = root.getChild();
+            if(bantu != null){
+                if(bantu.getSibling() == null){
+                    jumlah = jumlah + bantu.getNilai();
+                    findSum(bantu);
+                }
+                else{
+                    while(bantu.getSibling() != root.getChild()){
+                        jumlah = jumlah + bantu.getNilai();
+                        findSum(bantu);
+                        bantu = bantu.getSibling();
+                    }
+
+                    jumlah = jumlah + bantu.getNilai();
+                    findSum(bantu);
+                }
+            }
+        }
+        return jumlah;
+    }
+
+    void printSum(Node root){
+        int jumlah = findSum(root);
+        System.out.println(jumlah);
     }
     
 }
@@ -184,7 +214,13 @@ class CobaPohon{
         T.addChild("ca", 6, bantu);
 
         bantu = T.findNode("a", T.getRoot());
-        T.printTree(bantu);
+        T.printSum(bantu);
 
+        System.out.println();
+        T.printTree(T.getRoot());
+
+        System.out.println();
+        bantu = T.findNode("a", T.getRoot());
+        T.printTree(bantu);
     }
 }
