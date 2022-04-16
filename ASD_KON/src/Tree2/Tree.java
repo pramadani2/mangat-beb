@@ -55,30 +55,30 @@ public class Tree{
     }
 
     void makeTree(String namaFolder, int nilai){
-        Node baru;
-        baru = new Node();
+        Node newNode;
+        newNode = new Node();
 
-        baru.setFolder(namaFolder, nilai);
-        baru.setSibling(null);
-        baru.setChild(null);
-        root = baru;
+        newNode.setFolder(namaFolder, nilai);
+        newNode.setSibling(null);
+        newNode.setChild(null);
+        root = newNode;
     }
 
     void addChild(String namaFolder, int nilai, Node root){
         if(root != null){
-            Node baru;
-            baru = new Node();
-            baru.setFolder(namaFolder, nilai);
-            baru.setChild(null);
+            Node newNode;
+            newNode = new Node();
+            newNode.setFolder(namaFolder, nilai);
+            newNode.setChild(null);
 
             if(root.getChild() == null){
-                baru.setSibling(null);
-                root.setChild(baru);
+                newNode.setSibling(null);
+                root.setChild(newNode);
             }
             else{
                 if(root.getChild().getSibling() == null){
-                    baru.setSibling(root.getChild());
-                    root.getChild().setSibling(baru);
+                    newNode.setSibling(root.getChild());
+                    root.getChild().setSibling(newNode);
                 }
                 else{
                     Node last = root.getChild();
@@ -87,8 +87,8 @@ public class Tree{
                         last = last.getSibling();
                     }
 
-                    baru.setSibling(root.getChild());
-                    last.setSibling(baru);
+                    newNode.setSibling(root.getChild());
+                    last.setSibling(newNode);
                 }
             }
         }
@@ -102,37 +102,37 @@ public class Tree{
                 hasil = root;
             }
             else{
-                Node bantu = root.getChild();
+                Node temp = root.getChild();
 
-                if(bantu != null){
-                    if(bantu.getSibling() == null){
-                        if(bantu.getNamaFolder() == namaFolder) {
-                            hasil = bantu;
+                if(temp != null){
+                    if(temp.getSibling() == null){
+                        if(temp.getNamaFolder() == namaFolder) {
+                            hasil = temp;
                         }
                         else{
-                            hasil = findNode(namaFolder, bantu);
+                            hasil = findNode(namaFolder, temp);
                         }
                     }
                     else{
                         boolean ketemu = false;
 
-                        while((bantu.getSibling() != root.getChild()) && (ketemu == false)){
-                            if(bantu.getNamaFolder() == namaFolder){
-                                hasil = bantu;
+                        while((temp.getSibling() != root.getChild()) && (ketemu == false)){
+                            if(temp.getNamaFolder() == namaFolder){
+                                hasil = temp;
                                 ketemu = true;
                             }
                             else{
-                                hasil = findNode(namaFolder, bantu);
-                                bantu = bantu.getSibling();
+                                hasil = findNode(namaFolder, temp);
+                                temp = temp.getSibling();
                             }
                         }
 
                         if(ketemu == false){
-                            if(bantu.getNamaFolder() == namaFolder){
-                                hasil = bantu;
+                            if(temp.getNamaFolder() == namaFolder){
+                                hasil = temp;
                             }
                             else{
-                                hasil = findNode(namaFolder, bantu);
+                                hasil = findNode(namaFolder, temp);
                             }
                         }
                     }
@@ -146,52 +146,51 @@ public class Tree{
         if(root != null){
             System.out.println(root.getNamaFolder());
 
-            Node bantu = root.getChild();
-            if(bantu != null){
-                if(bantu.getSibling() == null){
-                    printTree(bantu);
+            Node temp = root.getChild();
+            if(temp != null){
+                if(temp.getSibling() == null){
+                    printTree(temp);
                 }
                 else{
-                    while(bantu.getSibling() != root.getChild()){
-                        printTree(bantu);
-                        bantu = bantu.getSibling();
+                    while(temp.getSibling() != root.getChild()){
+                        printTree(temp);
+                        temp = temp.getSibling();
                     }
-
-                    printTree(bantu);
+                    printTree(temp);
                 }
             }
         }
     }
 
     int findSum(Node root){
-        int jumlah = 0;
+        int sum = 0;
         if(root != null){
-            jumlah = root.getNilai();
+            sum = root.getNilai();
 
-            Node bantu = root.getChild();
-            if(bantu != null){
-                if(bantu.getSibling() == null){
-                    jumlah = jumlah + bantu.getNilai();
-                    findSum(bantu);
+            Node temp = root.getChild();
+            if(temp != null){
+                if(temp.getSibling() == null){
+                    sum = sum + temp.getNilai();
+                    findSum(temp);
                 }
                 else{
-                    while(bantu.getSibling() != root.getChild()){
-                        jumlah = jumlah + bantu.getNilai();
-                        findSum(bantu);
-                        bantu = bantu.getSibling();
+                    while(temp.getSibling() != root.getChild()){
+                        sum = sum + temp.getNilai();
+                        findSum(temp);
+                        temp = temp.getSibling();
                     }
 
-                    jumlah = jumlah + bantu.getNilai();
-                    findSum(bantu);
+                    sum = sum + temp.getNilai();
+                    findSum(temp);
                 }
             }
         }
-        return jumlah;
+        return sum;
     }
 
     void printSum(Node root){
-        int jumlah = findSum(root);
-        System.out.println(jumlah);
+        int sum = findSum(root);
+        System.out.println(sum);
     }
     
 }
@@ -199,28 +198,28 @@ public class Tree{
 class CobaPohon{
     public static void main(String[] args) {
         Tree T = new Tree();
-        Node bantu;
+        Node temp;
         T.makeTree("data", 0);
 
         T.addChild("a", 1, T.getRoot());
         T.addChild("b", 2, T.getRoot());
         T.addChild("c", 3, T.getRoot());
 
-        bantu = T.findNode("a", T.getRoot());
-        T.addChild("aa", 4, bantu);
-        T.addChild("ab", 5, bantu);
+        temp = T.findNode("a", T.getRoot());
+        T.addChild("aa", 4, temp);
+        T.addChild("ab", 5, temp);
 
-        bantu = T.findNode("c", T.getRoot());
-        T.addChild("ca", 6, bantu);
+        temp = T.findNode("c", T.getRoot());
+        T.addChild("ca", 6, temp);
 
-        bantu = T.findNode("a", T.getRoot());
-        T.printSum(bantu);
+        temp = T.findNode("a", T.getRoot());
+        T.printSum(temp);
 
         System.out.println();
         T.printTree(T.getRoot());
 
         System.out.println();
-        bantu = T.findNode("a", T.getRoot());
-        T.printTree(bantu);
+        temp = T.findNode("a", T.getRoot());
+        T.printTree(temp);
     }
 }
