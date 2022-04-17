@@ -215,11 +215,61 @@ class CobaPohon{
         T.addChild("cb", 30, temp);
         T.addChild("ce", 50, temp);
 
+
+
+
+
         temp = T.getRoot();
-        temp = T.findNode("b", temp);
-        temp = T.findNode("ba", temp);
-        T.addChild("baa", 500, temp);
-        T.addChild("bac", 25, temp);
+        Node prev = temp;
+
+        //input d
+
+        temp = T.findNode("d", prev);
+        if(temp == null){
+            T.addChild("d", 325432, prev);
+        }
+        else{
+            temp = T.findNode("d", prev);
+            T.addChild("d", 325432, temp);
+        }
+
+        //input da
+
+        temp = T.findNode("d", prev); //cari substrin 0
+        if(temp == null){ //kalau substring 0 tidak ada maka
+            T.addChild("da", 325432, prev); //input da full string ke root
+        }
+        else{ //kalau substring 0 ada
+            temp = T.findNode("d", prev); //maka cari substring 0
+            T.addChild("da", 325432, temp); //input da full string ke d
+        }
+
+        //input daa
+
+        temp = T.findNode("da", prev); //cari substring 0-1
+        if(temp == null){ //kalau substring 0-1 tidak ada maka
+            T.addChild("daa", 325432, prev); //input daa full string ke d
+        }
+        else{ //kalau substring 0-1 ada
+            temp = T.findNode("da", prev); //maka cari substring 0-1
+            T.addChild("daa", 325432, temp); //input daa full string ke da
+        }
+
+        //input db
+
+        temp = T.findNode("d", prev); //cari substrin 0
+        if(temp == null){ //kalau substring 0 tidak ada maka
+            T.addChild("db", 325432, prev); //input db full string ke root
+        }
+        else{ //kalau substring 0 ada
+            temp = T.findNode("d", prev); //maka cari substring 0
+            T.addChild("db", 325432, temp); //input db full string ke d
+        }
+
+
+
+
+
 
         temp = T.findNode("c", T.getRoot());
         T.printSum(temp);
@@ -228,7 +278,7 @@ class CobaPohon{
         T.printTree(T.getRoot());
 
         System.out.println();
-        temp = T.findNode("c", T.getRoot());
+        temp = T.findNode("d", T.getRoot());
         T.printTree(temp);
     }
 }
