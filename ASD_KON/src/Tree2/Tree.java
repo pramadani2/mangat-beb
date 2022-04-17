@@ -215,7 +215,9 @@ class CobaPohon{
         T.addChild("cb", 30, temp);
         T.addChild("ce", 50, temp);
 
-        temp = T.findNode("ba", T.findNode("b", T.getRoot()));
+        temp = T.getRoot();
+        temp = T.findNode("b", temp);
+        temp = T.findNode("ba", temp);
         T.addChild("baa", 500, temp);
         T.addChild("bac", 25, temp);
 
