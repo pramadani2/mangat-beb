@@ -1,5 +1,7 @@
 package Tree2;
 
+import javax.rmi.ssl.SslRMIClientSocketFactory;
+
 class Node{
     private String namaFolder;
     private int nilai;
@@ -144,7 +146,7 @@ public class Tree{
 
     void printTree(Node root){
         if(root != null){
-            System.out.println(root.getNamaFolder());
+            System.out.println(root.getNamaFolder()+ " (" + root.getNilai()+ ")");
 
             Node temp = root.getChild();
             if(temp != null){
@@ -188,9 +190,27 @@ public class Tree{
         return sum;
     }
 
-    void printSum(Node root){
+    void printSum(Node root, String namaFolder){
         int sum = findSum(root);
+        System.out.print("UKURAN /data/"+namaFolder+" = ");
         System.out.println(sum);
+    }
+
+    void add(String namaFolder, int nilai) {
+        Node parent = getRoot();
+        Node prev = parent;
+        int length = namaFolder.length()-1;
+        String slice = namaFolder.substring(0, length);
+
+        parent = findNode(slice, prev);
+
+        if(parent == null){
+            addChild(namaFolder, 325432, prev);
+        }
+        else{
+            addChild(namaFolder, 325432, parent);
+        }
+
     }
     
 }
@@ -214,6 +234,7 @@ class CobaPohon{
         temp = T.findNode("c", T.getRoot());
         T.addChild("cb", 30, temp);
         T.addChild("ce", 50, temp);
+
 
 
 
@@ -272,10 +293,13 @@ class CobaPohon{
 
         T.addChild("e", 35, T.getRoot());
         T.addChild("g", 35, T.getRoot());
+        T.add( "a", 910);
 
+        T.printSum(T.getRoot(), "");
 
-        temp = T.findNode("c", T.getRoot());
-        T.printSum(temp);
+        String namaFold = "c";
+        temp = T.findNode(namaFold, T.getRoot());
+        T.printSum(temp, namaFold);
 
         System.out.println();
         T.printTree(T.getRoot());
