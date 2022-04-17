@@ -246,7 +246,7 @@ class CobaPohon{
 
         //input daa
 
-        temp = T.findNode("da", prev); //cari substring 0-1
+        temp = T.findNode("da", prev); //cari substring 0-1 dari prev 
         if(temp == null){ //kalau substring 0-1 tidak ada maka
             T.addChild("daa", 325432, prev); //input daa full string ke d
         }
@@ -270,6 +270,9 @@ class CobaPohon{
 
 
 
+        T.addChild("e", 35, T.getRoot());
+        T.addChild("g", 35, T.getRoot());
+
 
         temp = T.findNode("c", T.getRoot());
         T.printSum(temp);
@@ -279,6 +282,10 @@ class CobaPohon{
 
         System.out.println();
         temp = T.findNode("d", T.getRoot());
+        T.printTree(temp);
+
+        System.out.println();
+        temp = T.findNode("da", temp);
         T.printTree(temp);
     }
 }
